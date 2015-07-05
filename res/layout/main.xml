@@ -29,6 +29,11 @@
                   android:layout_height="wrap_content"
                   android:gravity="center_horizontal"
                   android:orientation="vertical" >
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="More"
+            android:id="@+id/BtnMore" />
     <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="0dip"
@@ -38,11 +43,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:drawSelectorOnTop="false" />
-        <TextView
-                android:id="@+id/TextView01"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="" />
     </FrameLayout>
     </LinearLayout>
 </RelativeLayout>

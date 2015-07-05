@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
+//import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,9 +20,9 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ShareActionProvider;
+
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -40,11 +41,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
-
-import android.support.v4.view.PagerAdapter;
-
 //import android.support.v4.view.MenuItemCompat;
-//import android.support.v7.widget.ShareActionProvider;
+import android.support.v4.view.PagerAdapter;
+//import android.s/upport.v7.widget.ShareActionProvider;
 
 /**
  * Created with IntelliJ IDEA.
@@ -60,23 +59,39 @@ public class PagerImages extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate menu resource file.
+     /*
         getMenuInflater().inflate(R.menu.menu, menu);
+        MenuItem item = menu.findItem(R.id.action_share);
+        mShareActionProvider = (ShareActionProvider) item.getActionProvider(); //.getActionProvider();
 
-        // Locate MenuItem with ShareActionProvider
-        MenuItem item = menu.findItem(R.id.menu_item_share);
+       mShareActionProvider.setShareIntent(getDefaultIntent());
 
-        // Fetch and store ShareActionProvider
-      //  mShareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(item); // item.getActionProvider();
-
-        // Return true to display menu
+        return true;
+        */
         return true;
     }
 
     private void setShareIntent(Intent shareIntent) {
+
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(shareIntent);
         }
+    }
+
+    private Intent getDefaultIntent() {
+/*
+        Intent mShareIntent = new Intent();
+        mShareIntent.setAction(Intent.ACTION_SEND);
+        mShareIntent.setType("text/plain");
+        mShareIntent.putExtra(Intent.EXTRA_TEXT, "From me to you, this text is new.");
+  */
+        Bitmap cachedImage = ImageLoader.getInstance().getMemoryCache().get(ListUrlImage.get(0).Mname);
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_STREAM, cachedImage);
+
+        return intent;
     }
 
     private void SaveListtoFile(String NameandPathFiile)
@@ -169,11 +184,19 @@ public class PagerImages extends Activity {
         pager.setCurrentItem(0);
      }
 
+    public void SelectedImage(View v) {
+        Toast.makeText(this, "Exists", Toast.LENGTH_SHORT).show(); // do something here
+        //imageId = image.getId();
+       // Intent fullScreenIntent = new Intent(v.getContext(),FullImageActivity.class);
+       // fullScreenIntent.putExtra(ProfilePageNormalUser.class.getName(),imageId);
+       // ProfilePageNormalUser.this.startActivity(fullScreenIntent);
+    }
     @Override
     public void onBackPressed(){
         super.onBackPressed();
         return;
     }
+
 
     private static class ImageAdapter extends PagerAdapter {
 

@@ -45,7 +45,7 @@ public class ImagesExternalLib extends Activity {
         getMenuInflater().inflate(R.menu.menu, menu);
 
         // Locate MenuItem with ShareActionProvider
-        MenuItem item = menu.findItem(R.id.menu_item_share);
+        MenuItem item = menu.findItem(R.id.action_share);
 
         // Fetch and store ShareActionProvider
       //  mShareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(item); // item.getActionProvider();

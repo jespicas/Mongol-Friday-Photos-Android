@@ -6,6 +6,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.StrictMode;
+import android.view.View;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.cache.disc.DiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -19,6 +21,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * https://github.com/sephiroth74/ImageViewZoom
+ * Mirar d´utilitzar aixo  per el zoom.
+ * Llavors per el share afegir un boto ... per començar
+ * si no intentar posar standard pero em sembla que feia falta canviar de version android
+ *
  * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
  */
 public class UILApplication extends Application {
