@@ -1,0 +1,1 @@
+include ':app', ':jsoup-1.7.2', ':universal-image-loader-1.9.3'
