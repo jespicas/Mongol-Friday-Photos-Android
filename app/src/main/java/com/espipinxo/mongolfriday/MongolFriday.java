@@ -140,7 +140,8 @@ public class MongolFriday extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            new ShowAbout(getLayoutInflater().inflate(R.layout.activity_about, null, false)).showAbout();
             return true;
         }
 
