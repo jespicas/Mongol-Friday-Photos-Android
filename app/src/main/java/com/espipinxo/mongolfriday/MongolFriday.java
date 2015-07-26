@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -38,6 +37,7 @@ public class MongolFriday extends ActionBarActivity {
     private TextView tv;
 
     private ArrayList<String> ruls = null;
+    private ArrayList<Volumen> ListVols = null;
     ListView listView;
     LinearLayout layout;
     ArrayAdapter adapter;
@@ -66,13 +66,12 @@ public class MongolFriday extends ActionBarActivity {
         layout = (LinearLayout) findViewById(R.id.progressbar_view);
 
         ruls = new ArrayList<String>();
+        ListVols = new ArrayList<Volumen>();
 
         listView = (ListView) findViewById(R.id.listUrlsMongol);
         layout = (LinearLayout) findViewById(R.id.progressbar_view);
 
         ruls = new ArrayList<String>();
-
-      //  MaxPages = GetMaxPagesfromWebsite();
 
         new GetMaxPagesfromWebsite().execute();
 
@@ -148,6 +147,23 @@ public class MongolFriday extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private Volumen GetFormattedVolumen(String NameVolHref)
+    {
+        Volumen vol = new Volumen();
+        vol.Name = NameVolHref.replace("mongol-friday-photos-vol-","");
+        String[] SplittedName = vol.Name.split("-");
+
+        vol.Name = SplittedName[0] + ". ";
+        for(int i=1; i < SplittedName.length; i++)
+        {
+            StringBuilder rackingSystemSb = new StringBuilder(SplittedName[i].toLowerCase());
+            rackingSystemSb.setCharAt(0, Character.toUpperCase(rackingSystemSb.charAt(0)));
+            vol.Name = vol.Name + " " + rackingSystemSb.toString();
+        }
+        vol.UrlVolumen = NameVolHref;
+
+        return vol;
+    }
     private class UpdateListVol extends AsyncTask<Void,Void, Document>
     {
         public UpdateListVol(){ super();}
@@ -155,7 +171,6 @@ public class MongolFriday extends ActionBarActivity {
         protected Document doInBackground(Void... params) {
             Document doc = null;
             try {
-
                 doc = Jsoup.connect(Constants.Url_MongolFriday+"/page/" + String.valueOf(CurrentPagination) + "/").get();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -174,6 +189,7 @@ public class MongolFriday extends ActionBarActivity {
                     if (!dir.exists()) {
                         dir.mkdirs();
                     }
+                    ListVols.add(GetFormattedVolumen(UrlFoto));
                     ruls.add(UrlFoto);
                 }
                 options.clear();
@@ -232,6 +248,8 @@ public class MongolFriday extends ActionBarActivity {
                     if (!dir.exists()) {
                         dir.mkdirs();
                     }
+
+                    ListVols.add(GetFormattedVolumen(UrlFoto));
                     ruls.add(UrlFoto);
                 }
                 options.clear();
@@ -243,8 +261,9 @@ public class MongolFriday extends ActionBarActivity {
             UpdateLastPosition();
 
             layout.setVisibility(View.GONE);
-            adapter = new ArrayAdapter<String>(getApplicationContext(),
-                    android.R.layout.simple_expandable_list_item_1, ruls);
+            adapter = new ArrayAdapter<Volumen>(getApplicationContext(),
+                    android.R.layout.simple_expandable_list_item_1,ListVols);
+
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
@@ -252,11 +271,13 @@ public class MongolFriday extends ActionBarActivity {
 
                     Intent i = new Intent(getApplicationContext(), PagerImages.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    i.putExtra("SelectedUrl", ruls.get(position));
+                    i.putExtra("SelectedUrl", ListVols.get(position).UrlVolumen);
                     startActivity(i);
                 }
             });
          }
+
+
         private void UpdateLastPosition()
         {
         /*
@@ -292,6 +313,7 @@ Son 2 pagines de Mes... i per tant el 10 sera el 12 pero he de fer 2 ,3 i 13 i l
                                     String Image = inFile.toString().replace("_","-").replace(Constants.Path_App_Saving_Images+"/","");
                                     if (!Exists(Image))
                                     {
+                                        ListVols.add(GetFormattedVolumen(Image));
                                         ruls.add(Image);
                                     }
                                 }

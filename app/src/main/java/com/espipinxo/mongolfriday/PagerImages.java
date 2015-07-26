@@ -73,10 +73,10 @@ public class PagerImages extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_mongol_friday, menu);
+        getMenuInflater().inflate(R.menu.menu_gallery_photos, menu);
         MenuItem item = menu.findItem(R.id.menu_item_share);
         mShareActionProvider = new android.support.v7.widget.ShareActionProvider(getApplicationContext());
-        mShareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(item); //.getActionProvider();
+        mShareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(item);
         mShareActionProvider.setOnShareTargetSelectedListener(new ShareActionProvider.OnShareTargetSelectedListener() {
             @Override
             public boolean onShareTargetSelected(ShareActionProvider actionProvider, Intent intent) {
@@ -206,6 +206,7 @@ public class PagerImages extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setTitle(getResources().getString(R.string.app_name));
         getIntent().getExtras().getString("SelectedUrl");
         String UrlWithImages =  getIntent().getExtras().getString("SelectedUrl");
         PathImages = Environment.getExternalStorageDirectory() + "/MongolFridayPhotos/"+ UrlWithImages.replace("-","_");
