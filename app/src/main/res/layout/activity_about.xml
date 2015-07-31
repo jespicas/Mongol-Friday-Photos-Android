@@ -37,4 +37,7 @@
         android:layout_height="wrap_content" android:textColor="#ffffff" />
     <TextView android:text="@string/gestureimageviewUrl" android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:textColor="#ffffff" android:autoLink="web" android:linksClickable="true" />
+
+    <TextView android:text="Version:"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#ffffff" /> <TextView android:text="" android:id="@+id/versionnumber" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#ffffff" />
+
 </LinearLayout>

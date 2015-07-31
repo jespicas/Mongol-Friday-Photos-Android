@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
@@ -8,14 +9,16 @@ android {
         minSdkVersion 10
         targetSdkVersion 10
         versionCode 1
-        versionName "1.0"
+        versionName "2.0"
     }
     buildTypes {
         release {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //buildConfigField "String", "app_version", "2.0"
         }
     }
     productFlavors {
+
     }
 }
 

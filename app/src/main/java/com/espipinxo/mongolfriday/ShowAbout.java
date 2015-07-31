@@ -25,6 +25,8 @@ public class ShowAbout {
         int defaultColor = textView.getTextColors().getDefaultColor();
         textView.setTextColor(defaultColor);
         */
+        TextView version = (TextView) messageView.findViewById(R.id.versionnumber);
+        version.setText(BuildConfig.VERSION_NAME);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(messageView.getContext());
 

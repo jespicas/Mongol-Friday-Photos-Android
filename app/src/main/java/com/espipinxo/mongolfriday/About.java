@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class About extends ActionBarActivity {
@@ -12,6 +13,10 @@ public class About extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        TextView version = (TextView) findViewById(R.id.versionnumber);
+            version.setText(BuildConfig.VERSION_NAME);
+
+
     }
 
     @Override
