@@ -3,13 +3,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId "com.espipinxo.mongolfriday"
         minSdkVersion 10
         targetSdkVersion 10
         versionCode 1
-        versionName "2.0"
+        versionName "2.1"
     }
     buildTypes {
         release {
@@ -20,11 +19,17 @@ android {
     productFlavors {
 
     }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile project(':jsoup-1.7.2')
-    compile project(':universal-image-loader-1.9.3')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:22.0.0'
+    implementation project(':jsoup-1.7.2')
+    implementation project(':universal-image-loader-1.9.3')
 }

@@ -209,7 +209,9 @@ public class PagerImages extends ActionBarActivity {
            //     } else {
                     photo.Mname = line;
            //     }
-                ListUrlImage.add(photo);
+                if ( !ExistsImage(photo.Mname)) {
+                    ListUrlImage.add(photo);
+                }
             }
             br.close();
         }
@@ -217,6 +219,20 @@ public class PagerImages extends ActionBarActivity {
             //You'll need to add proper error handling here
         }
     }
+    public boolean ExistsImage(String imageName)
+    {
+        boolean exists = false;
+
+        for (PhotoMongol photoadded :ListUrlImage) {
+            if (photoadded.Mname.equals(imageName)){
+                exists = true;
+            } else {
+                exists = false;
+            }
+        }
+        return exists;
+    }
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -448,7 +464,9 @@ public class PagerImages extends ActionBarActivity {
                         PhotoMongol photo = new PhotoMongol();
                         photo.MPath = PathImages;
                         photo.Mname = imgs.get(i).attr("src").toString();
-                        ListUrlImage.add(photo);
+                        if ( !ListUrlImage.contains(photo)) {
+                            ListUrlImage.add(photo);
+                        }
                     }
                 }
                 SaveListtoFile(PathImages+"/listImages.txt");
